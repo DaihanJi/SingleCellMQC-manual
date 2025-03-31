@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Load and add data | SingleCellMQC</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::bs4_book,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Load and add data | SingleCellMQC" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::bs4_book,
+set in the _output.yml file.</p>" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Load and add data | SingleCellMQC" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::bs4_book,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Daihan Ji#, Mei Han#, Shuting Lu, Jiaying Zeng, Wen Zhong*" />
+
+
+<meta name="date" content="2025-04-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="sample-qc.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/core-js-2.5.3/shim.min.js"></script>
+<script src="libs/react-18.2.0/react.min.js"></script>
+<script src="libs/react-18.2.0/react-dom.min.js"></script>
+<script src="libs/reactwidget-1.0.0/react-tools.js"></script>
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="libs/reactable-0.4.4/reactable.css" rel="stylesheet" />
+<script src="libs/reactable-binding-0.4.4/reactable.js"></script>
+<link href="libs/jquery-sparkline-2.1.2/jquery.sparkline.css" rel="stylesheet" />
+<script src="libs/jquery-sparkline-2.1.2/jquery.sparkline.js"></script>
+<script src="libs/sparkline-binding-2.0/sparkline.js"></script>
+<script src="libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> <strong>About</strong></a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#introduction"><i class="fa fa-check"></i><b>1.1</b> Introduction</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#installation"><i class="fa fa-check"></i><b>1.2</b> Installation</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#bugs"><i class="fa fa-check"></i><b>1.3</b> Bugs</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="load-and-add-data.html"><a href="load-and-add-data.html"><i class="fa fa-check"></i><b>2</b> <strong>Load and add data</strong></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="load-and-add-data.html"><a href="load-and-add-data.html#loading-data-of-scrna-seq-or-cite-seq"><i class="fa fa-check"></i><b>2.1</b> Loading data of scRNA-seq or CITE-seq</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="load-and-add-data.html"><a href="load-and-add-data.html#data-import-without-bpcells"><i class="fa fa-check"></i><b>2.1.1</b> Data import Without BPCells</a></li>
+<li class="chapter" data-level="2.1.2" data-path="load-and-add-data.html"><a href="load-and-add-data.html#data-import-with-bpcells"><i class="fa fa-check"></i><b>2.1.2</b> Data import With BPCells</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="load-and-add-data.html"><a href="load-and-add-data.html#loading-data-of-scvdj-seq"><i class="fa fa-check"></i><b>2.2</b> Loading data of scV(D)J-seq</a></li>
+<li class="chapter" data-level="2.3" data-path="load-and-add-data.html"><a href="load-and-add-data.html#loading-data-of-multi-omics-scrna-seqcite-seq-scvdj-seq"><i class="fa fa-check"></i><b>2.3</b> Loading data of multi-omics (scRNA-seq/CITE-seq + scV(D)J-seq)</a></li>
+<li class="chapter" data-level="2.4" data-path="load-and-add-data.html"><a href="load-and-add-data.html#loading-and-adding-10x-metrics"><i class="fa fa-check"></i><b>2.4</b> Loading and adding 10X metrics</a></li>
+<li class="chapter" data-level="2.5" data-path="load-and-add-data.html"><a href="load-and-add-data.html#adding-information-of-samples"><i class="fa fa-check"></i><b>2.5</b> Adding information of samples</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="sample-qc.html"><a href="sample-qc.html"><i class="fa fa-check"></i><b>3</b> <strong>Sample QC</strong></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="sample-qc.html"><a href="sample-qc.html#sample-quality-assessment"><i class="fa fa-check"></i><b>3.1</b> Sample quality assessment</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="sample-qc.html"><a href="sample-qc.html#x-metrics-assessment"><i class="fa fa-check"></i><b>3.1.1</b> 10X metrics assessment</a></li>
+<li class="chapter" data-level="3.1.2" data-path="sample-qc.html"><a href="sample-qc.html#basic-metrics-assessment"><i class="fa fa-check"></i><b>3.1.2</b> Basic metrics assessment</a></li>
+<li class="chapter" data-level="3.1.3" data-path="sample-qc.html"><a href="sample-qc.html#visualisation-of-vdj-data"><i class="fa fa-check"></i><b>3.1.3</b> Visualisation of V(D)J data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="sample-qc.html"><a href="sample-qc.html#pct-outlier-sample-detection"><i class="fa fa-check"></i><b>3.2</b> PCT outlier sample detection</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="sample-qc.html"><a href="sample-qc.html#cell-type-annotation-sctype"><i class="fa fa-check"></i><b>3.2.1</b> Cell type annotation (ScType)</a></li>
+<li class="chapter" data-level="3.2.2" data-path="sample-qc.html"><a href="sample-qc.html#comparison-of-predicted-results-with-cell-proportion-range-database"><i class="fa fa-check"></i><b>3.2.2</b> Comparison of predicted results with cell proportion range database</a></li>
+<li class="chapter" data-level="3.2.3" data-path="sample-qc.html"><a href="sample-qc.html#inter-sample-outliers"><i class="fa fa-check"></i><b>3.2.3</b> Inter-sample outliers</a></li>
+<li class="chapter" data-level="3.2.4" data-path="sample-qc.html"><a href="sample-qc.html#outlier-detection-for-metrics-with-different-cell-types"><i class="fa fa-check"></i><b>3.2.4</b> Outlier detection for metrics with different cell types</a></li>
+<li class="chapter" data-level="3.2.5" data-path="sample-qc.html"><a href="sample-qc.html#visualisation-of-the-pct-of-cell-types"><i class="fa fa-check"></i><b>3.2.5</b> Visualisation of the PCT of cell types</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="sample-qc.html"><a href="sample-qc.html#sample-identity-verification"><i class="fa fa-check"></i><b>3.3</b> Sample identity verification</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="cell-qc.html"><a href="cell-qc.html"><i class="fa fa-check"></i><b>4</b> <strong>Cell QC</strong></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="cell-qc.html"><a href="cell-qc.html#empty-droplets-detection-if-required"><i class="fa fa-check"></i><b>4.1</b> Empty droplets detection (If Required)</a></li>
+<li class="chapter" data-level="4.2" data-path="cell-qc.html"><a href="cell-qc.html#low-quality-cells-detection"><i class="fa fa-check"></i><b>4.2</b> Low quality cells detection</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="cell-qc.html"><a href="cell-qc.html#fixed-cutoff"><i class="fa fa-check"></i><b>4.2.1</b> Fixed cutoff</a></li>
+<li class="chapter" data-level="4.2.2" data-path="cell-qc.html"><a href="cell-qc.html#mad-method"><i class="fa fa-check"></i><b>4.2.2</b> MAD method</a></li>
+<li class="chapter" data-level="4.2.3" data-path="cell-qc.html"><a href="cell-qc.html#miqc-method"><i class="fa fa-check"></i><b>4.2.3</b> miQC method</a></li>
+<li class="chapter" data-level="4.2.4" data-path="cell-qc.html"><a href="cell-qc.html#ddqc-method"><i class="fa fa-check"></i><b>4.2.4</b> ddqc method</a></li>
+<li class="chapter" data-level="4.2.5" data-path="cell-qc.html"><a href="cell-qc.html#run-multiple-methods"><i class="fa fa-check"></i><b>4.2.5</b> Run multiple methods</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="cell-qc.html"><a href="cell-qc.html#check-low-quality-cells-optional"><i class="fa fa-check"></i><b>4.3</b> Check low-quality cells (optional)</a></li>
+<li class="chapter" data-level="4.4" data-path="cell-qc.html"><a href="cell-qc.html#doublets-detection"><i class="fa fa-check"></i><b>4.4</b> Doublets detection</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="cell-qc.html"><a href="cell-qc.html#scdblfinder-method"><i class="fa fa-check"></i><b>4.4.1</b> scDblFinder method</a></li>
+<li class="chapter" data-level="4.4.2" data-path="cell-qc.html"><a href="cell-qc.html#hybrid-method"><i class="fa fa-check"></i><b>4.4.2</b> hybrid method</a></li>
+<li class="chapter" data-level="4.4.3" data-path="cell-qc.html"><a href="cell-qc.html#bcds-method"><i class="fa fa-check"></i><b>4.4.3</b> bcds method</a></li>
+<li class="chapter" data-level="4.4.4" data-path="cell-qc.html"><a href="cell-qc.html#cxds-method"><i class="fa fa-check"></i><b>4.4.4</b> cxds method</a></li>
+<li class="chapter" data-level="4.4.5" data-path="cell-qc.html"><a href="cell-qc.html#doubletfinder-method"><i class="fa fa-check"></i><b>4.4.5</b> DoubletFinder method</a></li>
+<li class="chapter" data-level="4.4.6" data-path="cell-qc.html"><a href="cell-qc.html#vdj-method"><i class="fa fa-check"></i><b>4.4.6</b> VDJ method</a></li>
+<li class="chapter" data-level="4.4.7" data-path="cell-qc.html"><a href="cell-qc.html#adt-method"><i class="fa fa-check"></i><b>4.4.7</b> ADT method</a></li>
+<li class="chapter" data-level="4.4.8" data-path="cell-qc.html"><a href="cell-qc.html#run-multiple-methods-1"><i class="fa fa-check"></i><b>4.4.8</b> Run multiple methods</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="cell-qc.html"><a href="cell-qc.html#filter-out-problematic-droplets-or-cells"><i class="fa fa-check"></i><b>4.5</b> Filter out problematic droplets or cells</a></li>
+<li class="chapter" data-level="4.6" data-path="cell-qc.html"><a href="cell-qc.html#visualisation-of-cell-qc-results"><i class="fa fa-check"></i><b>4.6</b> Visualisation of cell qc results</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="cell-qc.html"><a href="cell-qc.html#visualization-of-the-percentage-of-cells-filtered-by-different-methods"><i class="fa fa-check"></i><b>4.6.1</b> Visualization of the percentage of cells filtered by different methods</a></li>
+<li class="chapter" data-level="4.6.2" data-path="cell-qc.html"><a href="cell-qc.html#overlap-between-different-methods-upset-plot"><i class="fa fa-check"></i><b>4.6.2</b> Overlap between different methods (UpSet plot)</a></li>
+<li class="chapter" data-level="4.6.3" data-path="cell-qc.html"><a href="cell-qc.html#comparison-of-metrics-between-pass-and-fail-cells-identified-by-methods"><i class="fa fa-check"></i><b>4.6.3</b> Comparison of metrics between <em>Pass</em> and <em>Fail</em> cells identified by methods</a></li>
+<li class="chapter" data-level="4.6.4" data-path="cell-qc.html"><a href="cell-qc.html#visualization-of-scatter-plots-for-cell-metrics"><i class="fa fa-check"></i><b>4.6.4</b> Visualization of scatter plots for cell metrics</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="feature-qc.html"><a href="feature-qc.html"><i class="fa fa-check"></i><b>5</b> <strong>Feature QC</strong></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="feature-qc.html"><a href="feature-qc.html#feature-quality-assessment"><i class="fa fa-check"></i><b>5.1</b> Feature quality assessment</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="feature-qc.html"><a href="feature-qc.html#calculating-feature-metrics"><i class="fa fa-check"></i><b>5.1.1</b> Calculating feature metrics</a></li>
+<li class="chapter" data-level="5.1.2" data-path="feature-qc.html"><a href="feature-qc.html#reference-qc-thresholds-for-feature-qc"><i class="fa fa-check"></i><b>5.1.2</b> Reference QC thresholds for feature QC</a></li>
+<li class="chapter" data-level="5.1.3" data-path="feature-qc.html"><a href="feature-qc.html#calculating-per-feature-variance-explained-by-batch-factors."><i class="fa fa-check"></i><b>5.1.3</b> Calculating per-feature variance explained by batch factors.</a></li>
+<li class="chapter" data-level="5.1.4" data-path="feature-qc.html"><a href="feature-qc.html#base-plots-of-feature-metrics"><i class="fa fa-check"></i><b>5.1.4</b> Base plots of feature metrics</a></li>
+<li class="chapter" data-level="5.1.5" data-path="feature-qc.html"><a href="feature-qc.html#scatter-plot-of-the-feature-metrics"><i class="fa fa-check"></i><b>5.1.5</b> Scatter plot of the feature metrics</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="feature-qc.html"><a href="feature-qc.html#systematic-background-noise-correction"><i class="fa fa-check"></i><b>5.2</b> Systematic background noise correction</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="feature-qc.html"><a href="feature-qc.html#sccdc"><i class="fa fa-check"></i><b>5.2.1</b> scCDC</a></li>
+<li class="chapter" data-level="5.2.2" data-path="feature-qc.html"><a href="feature-qc.html#decontx-rna"><i class="fa fa-check"></i><b>5.2.2</b> DecontX (RNA)</a></li>
+<li class="chapter" data-level="5.2.3" data-path="feature-qc.html"><a href="feature-qc.html#decontpro-adt"><i class="fa fa-check"></i><b>5.2.3</b> DecontPro (ADT)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="batch-effect-evaluation.html"><a href="batch-effect-evaluation.html"><i class="fa fa-check"></i><b>6</b> <strong>Batch effect evaluation</strong></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="batch-effect-evaluation.html"><a href="batch-effect-evaluation.html#sample-level"><i class="fa fa-check"></i><b>6.1</b> Sample level</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="batch-effect-evaluation.html"><a href="batch-effect-evaluation.html#pca-of-pseudobulk-data-at-the-sample-level"><i class="fa fa-check"></i><b>6.1.1</b> PCA of pseudobulk data at the sample level</a></li>
+<li class="chapter" data-level="6.1.2" data-path="batch-effect-evaluation.html"><a href="batch-effect-evaluation.html#performing-svd-analysis-and-calculating-r²-values"><i class="fa fa-check"></i><b>6.1.2</b> Performing SVD analysis and calculating R² values</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="batch-effect-evaluation.html"><a href="batch-effect-evaluation.html#cell-level"><i class="fa fa-check"></i><b>6.2</b> Cell level</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="batch-effect-evaluation.html"><a href="batch-effect-evaluation.html#rna-umap"><i class="fa fa-check"></i><b>6.2.1</b> RNA UMAP</a></li>
+<li class="chapter" data-level="6.2.2" data-path="batch-effect-evaluation.html"><a href="batch-effect-evaluation.html#adt-umap"><i class="fa fa-check"></i><b>6.2.2</b> ADT UMAP</a></li>
+<li class="chapter" data-level="6.2.3" data-path="batch-effect-evaluation.html"><a href="batch-effect-evaluation.html#rnaadt-umap"><i class="fa fa-check"></i><b>6.2.3</b> RNA+ADT UMAP</a></li>
+<li class="chapter" data-level="6.2.4" data-path="batch-effect-evaluation.html"><a href="batch-effect-evaluation.html#harmony-umap"><i class="fa fa-check"></i><b>6.2.4</b> harmony UMAP</a></li>
+<li class="chapter" data-level="6.2.5" data-path="batch-effect-evaluation.html"><a href="batch-effect-evaluation.html#calculating-per-feature-variance-explained-by-variables-at-cell-level."><i class="fa fa-check"></i><b>6.2.5</b> Calculating per-feature variance explained by variables at cell level.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="qc-html-report.html"><a href="qc-html-report.html"><i class="fa fa-check"></i><b>7</b> <strong>QC HTML report</strong></a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">SingleCellMQC</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="load-and-add-data" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">2</span> <strong>Load and add data</strong><a href="load-and-add-data.html#load-and-add-data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><strong>Compiled: 2025-04-01</strong>
+<strong>Written by Jiaying Zeng and Daihan Ji</strong></p>
+<p>SingleCellMQC provides number of functions to simplify the process of loading single-cell multi-omics data as well as clinical information. Multi-omics includes <strong>scRNA-seq, CITE-seq (RNA+ADT), and scTCR/BCR-seq</strong>. Generally, GEX data will be automatically constructed into a Seurat object after reading. If you want to reduce memory usage, we encourage users to use <a href="https://github.com/bnprks/BPCells"><code>BPCells</code></a> package read and save data. We support <code>BPCells</code> read operations in our read functions.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="load-and-add-data.html#cb2-1" tabindex="-1"></a><span class="fu">library</span>(SingleCellMQC)</span>
+<span id="cb2-2"><a href="load-and-add-data.html#cb2-2" tabindex="-1"></a><span class="fu">library</span>(future)</span>
+<span id="cb2-3"><a href="load-and-add-data.html#cb2-3" tabindex="-1"></a><span class="co"># Set global memory limit to 1GB (1024 MB * 1024 KB/MB * 1024 B/KB)</span></span>
+<span id="cb2-4"><a href="load-and-add-data.html#cb2-4" tabindex="-1"></a><span class="co"># The default limit is 500MB, which is often insufficient, so it&#39;s recommended to set it to 1GB or higher.</span></span>
+<span id="cb2-5"><a href="load-and-add-data.html#cb2-5" tabindex="-1"></a><span class="fu">options</span>(<span class="at">future.globals.maxSize =</span> <span class="dv">1024</span> <span class="sc">*</span> <span class="dv">1024</span> <span class="sc">*</span> <span class="dv">1024</span>)</span></code></pre></div>
+<div id="loading-data-of-scrna-seq-or-cite-seq" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Loading data of scRNA-seq or CITE-seq<a href="load-and-add-data.html#loading-data-of-scrna-seq-or-cite-seq" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="data-import-without-bpcells" class="section level3 hasAnchor" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Data import Without BPCells<a href="load-and-add-data.html#data-import-without-bpcells" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Upon standard CellRanger pipeline, you will have a lot of output files. The input directory should contained <strong>barcodes.tsv.gz</strong>, <strong>features.tsv.gz</strong> and <strong>matrix.mtx.gz</strong>.</p>
+<pre class="plaintext"><code>sample_filtered_feature_bc_matrix/
+├── barcodes.tsv.gz
+├── features.tsv.gz
+└── matrix.mtx.gz</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="load-and-add-data.html#cb4-1" tabindex="-1"></a></span>
+<span id="cb4-2"><a href="load-and-add-data.html#cb4-2" tabindex="-1"></a><span class="co"># A vector of outputs of the cellranger pipeline from 10X</span></span>
+<span id="cb4-3"><a href="load-and-add-data.html#cb4-3" tabindex="-1"></a>dir_GEX <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb4-4"><a href="load-and-add-data.html#cb4-4" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP1/sample_filtered_feature_bc_matrix/&quot;</span>,</span>
+<span id="cb4-5"><a href="load-and-add-data.html#cb4-5" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP2/sample_filtered_feature_bc_matrix/&quot;</span>,</span>
+<span id="cb4-6"><a href="load-and-add-data.html#cb4-6" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP3/sample_filtered_feature_bc_matrix/&quot;</span>,</span>
+<span id="cb4-7"><a href="load-and-add-data.html#cb4-7" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP3-rep/sample_filtered_feature_bc_matrix/&quot;</span></span>
+<span id="cb4-8"><a href="load-and-add-data.html#cb4-8" tabindex="-1"></a>)</span>
+<span id="cb4-9"><a href="load-and-add-data.html#cb4-9" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="load-and-add-data.html#cb4-10" tabindex="-1"></a>sample_name <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;TP1&quot;</span>, <span class="st">&quot;TP2&quot;</span>, <span class="st">&quot;TP3&quot;</span>, <span class="st">&quot;TP3-rep&quot;</span>)</span>
+<span id="cb4-11"><a href="load-and-add-data.html#cb4-11" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="load-and-add-data.html#cb4-12" tabindex="-1"></a>pbmc_GEX <span class="ot">&lt;-</span> <span class="fu">Read10XData</span>(<span class="at">dir_GEX =</span> dir_GEX, <span class="at">sample =</span> sample_name)</span>
+<span id="cb4-13"><a href="load-and-add-data.html#cb4-13" tabindex="-1"></a>pbmc_GEX</span>
+<span id="cb4-14"><a href="load-and-add-data.html#cb4-14" tabindex="-1"></a><span class="do">## An object of class Seurat </span></span>
+<span id="cb4-15"><a href="load-and-add-data.html#cb4-15" tabindex="-1"></a><span class="do">## 36738 features across 28498 samples within 2 assays </span></span>
+<span id="cb4-16"><a href="load-and-add-data.html#cb4-16" tabindex="-1"></a><span class="do">## Active assay: RNA (36601 features, 0 variable features)</span></span>
+<span id="cb4-17"><a href="load-and-add-data.html#cb4-17" tabindex="-1"></a><span class="do">##  1 layer present: counts</span></span>
+<span id="cb4-18"><a href="load-and-add-data.html#cb4-18" tabindex="-1"></a><span class="do">##  1 other assay present: ADT</span></span>
+<span id="cb4-19"><a href="load-and-add-data.html#cb4-19" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="load-and-add-data.html#cb4-20" tabindex="-1"></a><span class="co"># Show the size of the subject</span></span>
+<span id="cb4-21"><a href="load-and-add-data.html#cb4-21" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">object.size</span>(pbmc_GEX), <span class="at">units =</span> <span class="st">&quot;auto&quot;</span>)  </span>
+<span id="cb4-22"><a href="load-and-add-data.html#cb4-22" tabindex="-1"></a><span class="do">## 575.9 Mb</span></span></code></pre></div>
+<p>If your cell×gene expression matrix data is stored in HDF5 file format, use <strong><code>Read10XH5Data</code></strong> instead. The input file <strong>sample_filtered_feature_bc_matrix.h5</strong> should be contained.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="load-and-add-data.html#cb5-1" tabindex="-1"></a><span class="co"># A vector of outputs of the cellranger pipeline from 10X</span></span>
+<span id="cb5-2"><a href="load-and-add-data.html#cb5-2" tabindex="-1"></a>dir_GEX <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb5-3"><a href="load-and-add-data.html#cb5-3" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP1/sample_filtered_feature_bc_matrix.h5&quot;</span>,</span>
+<span id="cb5-4"><a href="load-and-add-data.html#cb5-4" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP2/sample_filtered_feature_bc_matrix.h5&quot;</span>,</span>
+<span id="cb5-5"><a href="load-and-add-data.html#cb5-5" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP3/sample_filtered_feature_bc_matrix.h5&quot;</span>,</span>
+<span id="cb5-6"><a href="load-and-add-data.html#cb5-6" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP3-rep/sample_filtered_feature_bc_matrix.h5&quot;</span></span>
+<span id="cb5-7"><a href="load-and-add-data.html#cb5-7" tabindex="-1"></a>)</span>
+<span id="cb5-8"><a href="load-and-add-data.html#cb5-8" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="load-and-add-data.html#cb5-9" tabindex="-1"></a>sample_name <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;TP1&quot;</span>, <span class="st">&quot;TP2&quot;</span>, <span class="st">&quot;TP3&quot;</span>, <span class="st">&quot;TP3-rep&quot;</span>)</span>
+<span id="cb5-10"><a href="load-and-add-data.html#cb5-10" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="load-and-add-data.html#cb5-11" tabindex="-1"></a>pbmc_GEX <span class="ot">&lt;-</span> <span class="fu">Read10XH5Data</span>(<span class="at">dir_GEX =</span> dir_GEX, <span class="at">sample =</span> sample_name)</span></code></pre></div>
+</div>
+<div id="data-import-with-bpcells" class="section level3 hasAnchor" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> Data import With BPCells<a href="load-and-add-data.html#data-import-with-bpcells" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><code>BPCells</code> is a powerful tool designed for efficient handling of large-scale single-cell datasets. In this section, we demonstrate how to import single-cell data using BPCells, leveraging its optimized storage and memory management capabilities. Whether you’re working with 10x Genomics, HDF5, or other formats, <code>BPCells</code> provides a seamless and scalable solution for data import, enabling faster and more memory-efficient workflows. To enable BPCells-based data reading, simply set <strong><code>saveBPCells=TRUE</code></strong> and specify the <strong><code>dir_BPCells</code></strong> path for saving the processed data. <strong><code>Read10XData()</code></strong> and <strong><code>Read10XH5Data()</code></strong> functions support BPCells-based data reading.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="load-and-add-data.html#cb6-1" tabindex="-1"></a></span>
+<span id="cb6-2"><a href="load-and-add-data.html#cb6-2" tabindex="-1"></a><span class="co"># A vector of outputs of the cellranger pipeline from 10X</span></span>
+<span id="cb6-3"><a href="load-and-add-data.html#cb6-3" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="load-and-add-data.html#cb6-4" tabindex="-1"></a>dir_GEX <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb6-5"><a href="load-and-add-data.html#cb6-5" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP1/sample_filtered_feature_bc_matrix/&quot;</span>,</span>
+<span id="cb6-6"><a href="load-and-add-data.html#cb6-6" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP2/sample_filtered_feature_bc_matrix/&quot;</span>,</span>
+<span id="cb6-7"><a href="load-and-add-data.html#cb6-7" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP3/sample_filtered_feature_bc_matrix/&quot;</span>,</span>
+<span id="cb6-8"><a href="load-and-add-data.html#cb6-8" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP3-rep/sample_filtered_feature_bc_matrix/&quot;</span></span>
+<span id="cb6-9"><a href="load-and-add-data.html#cb6-9" tabindex="-1"></a>)</span>
+<span id="cb6-10"><a href="load-and-add-data.html#cb6-10" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="load-and-add-data.html#cb6-11" tabindex="-1"></a>sample_name <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;TP1&quot;</span>, <span class="st">&quot;TP2&quot;</span>, <span class="st">&quot;TP3&quot;</span>, <span class="st">&quot;TP3-rep&quot;</span>)</span>
+<span id="cb6-12"><a href="load-and-add-data.html#cb6-12" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="load-and-add-data.html#cb6-13" tabindex="-1"></a>pbmc <span class="ot">&lt;-</span> <span class="fu">Read10XData</span>(<span class="at">dir_GEX =</span> dir_GEX, </span>
+<span id="cb6-14"><a href="load-and-add-data.html#cb6-14" tabindex="-1"></a>                    <span class="at">sample =</span> sample_name, </span>
+<span id="cb6-15"><a href="load-and-add-data.html#cb6-15" tabindex="-1"></a>                    <span class="at">saveBPCells =</span> T, </span>
+<span id="cb6-16"><a href="load-and-add-data.html#cb6-16" tabindex="-1"></a>                    <span class="at">dir_BPCells =</span> <span class="st">&quot;./BPCellData&quot;</span>)</span>
+<span id="cb6-17"><a href="load-and-add-data.html#cb6-17" tabindex="-1"></a>pbmc</span>
+<span id="cb6-18"><a href="load-and-add-data.html#cb6-18" tabindex="-1"></a><span class="do">## An object of class Seurat </span></span>
+<span id="cb6-19"><a href="load-and-add-data.html#cb6-19" tabindex="-1"></a><span class="do">## 36738 features across 28498 samples within 2 assays </span></span>
+<span id="cb6-20"><a href="load-and-add-data.html#cb6-20" tabindex="-1"></a><span class="do">## Active assay: RNA (36601 features, 0 variable features)</span></span>
+<span id="cb6-21"><a href="load-and-add-data.html#cb6-21" tabindex="-1"></a><span class="do">##  1 layer present: counts</span></span>
+<span id="cb6-22"><a href="load-and-add-data.html#cb6-22" tabindex="-1"></a><span class="do">##  1 other assay present: ADT</span></span>
+<span id="cb6-23"><a href="load-and-add-data.html#cb6-23" tabindex="-1"></a></span>
+<span id="cb6-24"><a href="load-and-add-data.html#cb6-24" tabindex="-1"></a><span class="co"># Show the size of the subject</span></span>
+<span id="cb6-25"><a href="load-and-add-data.html#cb6-25" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">object.size</span>(pbmc), <span class="at">units =</span> <span class="st">&quot;auto&quot;</span>)  </span>
+<span id="cb6-26"><a href="load-and-add-data.html#cb6-26" tabindex="-1"></a><span class="do">## 27.7 Mb</span></span></code></pre></div>
+</div>
+</div>
+<div id="loading-data-of-scvdj-seq" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Loading data of scV(D)J-seq<a href="load-and-add-data.html#loading-data-of-scvdj-seq" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Upon standard CellRanger pipeline, you will have a lot of output files. For scV(D)J-seq, the input file <strong>filtered_contig_annotations.csv</strong> should be contained.</p>
+<pre class="plaintext"><code>vdj_out/\
+├── filtered_contig_annotations.csv \&lt;-- **This contains the count data we want!**\
+├── clonotypes.csv\
+└── ...</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="load-and-add-data.html#cb8-1" tabindex="-1"></a><span class="co"># A vector of outputs of the cellranger pipeline from 10X</span></span>
+<span id="cb8-2"><a href="load-and-add-data.html#cb8-2" tabindex="-1"></a>dir_TCR <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb8-3"><a href="load-and-add-data.html#cb8-3" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP1/vdj_t/filtered_contig_annotations.csv&quot;</span>,</span>
+<span id="cb8-4"><a href="load-and-add-data.html#cb8-4" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP2/vdj_t/filtered_contig_annotations.csv&quot;</span>,</span>
+<span id="cb8-5"><a href="load-and-add-data.html#cb8-5" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP3/vdj_t/filtered_contig_annotations.csv&quot;</span>,</span>
+<span id="cb8-6"><a href="load-and-add-data.html#cb8-6" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP3-rep/vdj_t/filtered_contig_annotations.csv&quot;</span></span>
+<span id="cb8-7"><a href="load-and-add-data.html#cb8-7" tabindex="-1"></a>)</span>
+<span id="cb8-8"><a href="load-and-add-data.html#cb8-8" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="load-and-add-data.html#cb8-9" tabindex="-1"></a>sample_name <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;TP1&quot;</span>, <span class="st">&quot;TP2&quot;</span>, <span class="st">&quot;TP3&quot;</span>, <span class="st">&quot;TP3-rep&quot;</span>)</span>
+<span id="cb8-10"><a href="load-and-add-data.html#cb8-10" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="load-and-add-data.html#cb8-11" tabindex="-1"></a>pbmc_tcr <span class="ot">&lt;-</span> <span class="fu">Read10XData</span>(<span class="at">dir_TCR =</span> dir_TCR, <span class="at">sample =</span> sample_name)</span>
+<span id="cb8-12"><a href="load-and-add-data.html#cb8-12" tabindex="-1"></a><span class="fu">str</span>(pbmc_tcr, <span class="at">list.len =</span> <span class="dv">4</span>) </span></code></pre></div>
+<pre><code>## List of 4
+##  $ TP1    :&#39;data.frame&#39;: 5360 obs. of  32 variables:
+##   ..$ barcode              : chr [1:5360] &quot;AAACCTGAGAATGTTG-1&quot; &quot;AAACCTGAGAATGTTG-1&quot; &quot;AAACCTGCAAGCGATG-1&quot; &quot;AAACCTGCAAGCGATG-1&quot; ...
+##   ..$ is_cell              : logi [1:5360] TRUE TRUE TRUE TRUE TRUE TRUE ...
+##   ..$ contig_id            : chr [1:5360] &quot;AAACCTGAGAATGTTG-1_contig_1&quot; &quot;AAACCTGAGAATGTTG-1_contig_2&quot; &quot;AAACCTGCAAGCGATG-1_contig_1&quot; &quot;AAACCTGCAAGCGATG-1_contig_2&quot; ...
+##   ..$ high_confidence      : logi [1:5360] TRUE TRUE TRUE TRUE TRUE TRUE ...
+##   .. [list output truncated]
+##  $ TP2    :&#39;data.frame&#39;: 4271 obs. of  32 variables:
+##   ..$ barcode              : chr [1:4271] &quot;AAACCTGAGTGAAGTT-1&quot; &quot;AAACCTGGTCACACGC-1&quot; &quot;AAACCTGGTCACACGC-1&quot; &quot;AAACCTGTCTGCAAGT-1&quot; ...
+##   ..$ is_cell              : logi [1:4271] TRUE TRUE TRUE TRUE TRUE TRUE ...
+##   ..$ contig_id            : chr [1:4271] &quot;AAACCTGAGTGAAGTT-1_contig_1&quot; &quot;AAACCTGGTCACACGC-1_contig_1&quot; &quot;AAACCTGGTCACACGC-1_contig_2&quot; &quot;AAACCTGTCTGCAAGT-1_contig_1&quot; ...
+##   ..$ high_confidence      : logi [1:4271] TRUE TRUE TRUE TRUE TRUE TRUE ...
+##   .. [list output truncated]
+##  $ TP3    :&#39;data.frame&#39;: 695 obs. of  32 variables:
+##   ..$ barcode              : chr [1:695] &quot;AAACCTGTCGTTGCCT-1&quot; &quot;AAAGATGCATGGATGG-1&quot; &quot;AAAGATGCATGGATGG-1&quot; &quot;AACACGTAGAGTAAGG-1&quot; ...
+##   ..$ is_cell              : logi [1:695] TRUE TRUE TRUE TRUE TRUE TRUE ...
+##   ..$ contig_id            : chr [1:695] &quot;AAACCTGTCGTTGCCT-1_contig_1&quot; &quot;AAAGATGCATGGATGG-1_contig_1&quot; &quot;AAAGATGCATGGATGG-1_contig_2&quot; &quot;AACACGTAGAGTAAGG-1_contig_1&quot; ...
+##   ..$ high_confidence      : logi [1:695] TRUE TRUE TRUE TRUE TRUE TRUE ...
+##   .. [list output truncated]
+##  $ TP3-rep:&#39;data.frame&#39;: 2883 obs. of  32 variables:
+##   ..$ barcode              : chr [1:2883] &quot;AAACCTGAGTGGGATC-1&quot; &quot;AAACCTGCACTTAACG-1&quot; &quot;AAACCTGCACTTAACG-1&quot; &quot;AAACCTGGTGAAGGCT-1&quot; ...
+##   ..$ is_cell              : logi [1:2883] TRUE TRUE TRUE TRUE TRUE TRUE ...
+##   ..$ contig_id            : chr [1:2883] &quot;AAACCTGAGTGGGATC-1_contig_1&quot; &quot;AAACCTGCACTTAACG-1_contig_1&quot; &quot;AAACCTGCACTTAACG-1_contig_2&quot; &quot;AAACCTGGTGAAGGCT-1_contig_1&quot; ...
+##   ..$ high_confidence      : logi [1:2883] TRUE TRUE TRUE TRUE TRUE TRUE ...
+##   .. [list output truncated]
+##  - attr(*, &quot;class&quot;)= chr [1:2] &quot;list&quot; &quot;VDJ&quot;</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="load-and-add-data.html#cb10-1" tabindex="-1"></a><span class="co"># A vector of outputs of the cellranger pipeline from 10X</span></span>
+<span id="cb10-2"><a href="load-and-add-data.html#cb10-2" tabindex="-1"></a>dir_BCR <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb10-3"><a href="load-and-add-data.html#cb10-3" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP1/vdj_b/filtered_contig_annotations.csv&quot;</span>,</span>
+<span id="cb10-4"><a href="load-and-add-data.html#cb10-4" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP2/vdj_b/filtered_contig_annotations.csv&quot;</span>,</span>
+<span id="cb10-5"><a href="load-and-add-data.html#cb10-5" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP3/vdj_b/filtered_contig_annotations.csv&quot;</span>,</span>
+<span id="cb10-6"><a href="load-and-add-data.html#cb10-6" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP3-rep/vdj_b/filtered_contig_annotations.csv&quot;</span></span>
+<span id="cb10-7"><a href="load-and-add-data.html#cb10-7" tabindex="-1"></a>)</span>
+<span id="cb10-8"><a href="load-and-add-data.html#cb10-8" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="load-and-add-data.html#cb10-9" tabindex="-1"></a>sample_name <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;TP1&quot;</span>, <span class="st">&quot;TP2&quot;</span>, <span class="st">&quot;TP3&quot;</span>, <span class="st">&quot;TP3-rep&quot;</span>)</span>
+<span id="cb10-10"><a href="load-and-add-data.html#cb10-10" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="load-and-add-data.html#cb10-11" tabindex="-1"></a>pbmc_bcr <span class="ot">&lt;-</span> <span class="fu">Read10XData</span>(<span class="at">dir_BCR =</span> dir_BCR, <span class="at">sample =</span> sample_name)</span>
+<span id="cb10-12"><a href="load-and-add-data.html#cb10-12" tabindex="-1"></a><span class="fu">str</span>(pbmc_bcr, <span class="at">list.len =</span> <span class="dv">4</span>)</span></code></pre></div>
+<pre><code>## List of 4
+##  $ TP1    :&#39;data.frame&#39;: 1110 obs. of  32 variables:
+##   ..$ barcode              : chr [1:1110] &quot;AAACCTGGTAGCCTAT-1&quot; &quot;AAACCTGGTAGCCTAT-1&quot; &quot;AAACCTGGTTCGAATC-1&quot; &quot;AAACCTGGTTCGAATC-1&quot; ...
+##   ..$ is_cell              : logi [1:1110] TRUE TRUE TRUE TRUE TRUE TRUE ...
+##   ..$ contig_id            : chr [1:1110] &quot;AAACCTGGTAGCCTAT-1_contig_1&quot; &quot;AAACCTGGTAGCCTAT-1_contig_2&quot; &quot;AAACCTGGTTCGAATC-1_contig_1&quot; &quot;AAACCTGGTTCGAATC-1_contig_2&quot; ...
+##   ..$ high_confidence      : logi [1:1110] TRUE TRUE TRUE TRUE TRUE TRUE ...
+##   .. [list output truncated]
+##  $ TP2    :&#39;data.frame&#39;: 2061 obs. of  32 variables:
+##   ..$ barcode              : chr [1:2061] &quot;AAACCTGCATCGGGTC-1&quot; &quot;AAACCTGCATCGGGTC-1&quot; &quot;AAACCTGCATCGGGTC-1&quot; &quot;AAACCTGGTAGAGTGC-1&quot; ...
+##   ..$ is_cell              : logi [1:2061] TRUE TRUE TRUE TRUE TRUE TRUE ...
+##   ..$ contig_id            : chr [1:2061] &quot;AAACCTGCATCGGGTC-1_contig_1&quot; &quot;AAACCTGCATCGGGTC-1_contig_2&quot; &quot;AAACCTGCATCGGGTC-1_contig_3&quot; &quot;AAACCTGGTAGAGTGC-1_contig_1&quot; ...
+##   ..$ high_confidence      : logi [1:2061] TRUE TRUE TRUE TRUE TRUE TRUE ...
+##   .. [list output truncated]
+##  $ TP3    :&#39;data.frame&#39;: 1538 obs. of  32 variables:
+##   ..$ barcode              : chr [1:1538] &quot;AAACGGGCAGCAGTTT-1&quot; &quot;AAACGGGCAGCAGTTT-1&quot; &quot;AAACGGGGTTCAGTAC-1&quot; &quot;AAACGGGGTTCAGTAC-1&quot; ...
+##   ..$ is_cell              : logi [1:1538] TRUE TRUE TRUE TRUE TRUE TRUE ...
+##   ..$ contig_id            : chr [1:1538] &quot;AAACGGGCAGCAGTTT-1_contig_1&quot; &quot;AAACGGGCAGCAGTTT-1_contig_2&quot; &quot;AAACGGGGTTCAGTAC-1_contig_1&quot; &quot;AAACGGGGTTCAGTAC-1_contig_2&quot; ...
+##   ..$ high_confidence      : logi [1:1538] TRUE TRUE TRUE TRUE TRUE TRUE ...
+##   .. [list output truncated]
+##  $ TP3-rep:&#39;data.frame&#39;: 1371 obs. of  32 variables:
+##   ..$ barcode              : chr [1:1371] &quot;AAACCTGGTTGTTTGG-1&quot; &quot;AAACCTGGTTGTTTGG-1&quot; &quot;AAACGGGCAAGTACCT-1&quot; &quot;AAACGGGCAAGTACCT-1&quot; ...
+##   ..$ is_cell              : logi [1:1371] TRUE TRUE TRUE TRUE TRUE TRUE ...
+##   ..$ contig_id            : chr [1:1371] &quot;AAACCTGGTTGTTTGG-1_contig_1&quot; &quot;AAACCTGGTTGTTTGG-1_contig_2&quot; &quot;AAACGGGCAAGTACCT-1_contig_1&quot; &quot;AAACGGGCAAGTACCT-1_contig_2&quot; ...
+##   ..$ high_confidence      : logi [1:1371] TRUE TRUE TRUE TRUE TRUE TRUE ...
+##   .. [list output truncated]
+##  - attr(*, &quot;class&quot;)= chr [1:2] &quot;list&quot; &quot;VDJ&quot;</code></pre>
+</div>
+<div id="loading-data-of-multi-omics-scrna-seqcite-seq-scvdj-seq" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Loading data of multi-omics (scRNA-seq/CITE-seq + scV(D)J-seq)<a href="load-and-add-data.html#loading-data-of-multi-omics-scrna-seqcite-seq-scvdj-seq" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Upon standard CellRanger pipeline, you will have a lot of output files. The input directory (scRNA-seq or CITE-seq) <em>barcodes.tsv.gz</em>, <em>features.tsv.gz</em> and <em>matrix.mtx.gz</em> should contained. If your cell×gene expression matrix data is stored in HDF5 file format, use <code>Read10XH5Data</code> instead. The input file (scV(D)J-seq) <em>filtered_contig_annotations.csv</em> also should be contained.</p>
+<p>sample_filtered_feature_bc_matrix/<br />
+├── barcodes.tsv.gz<br />
+├── features.tsv.gz<br />
+└── matrix.mtx.gz</p>
+<p>vdj_out/<br />
+├── filtered_contig_annotations.csv &lt;– <strong>This contains the count data we want!</strong><br />
+├── clonotypes.csv<br />
+└── …</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="load-and-add-data.html#cb12-1" tabindex="-1"></a><span class="co"># A vector of outputs of the cellranger pipeline from 10X</span></span>
+<span id="cb12-2"><a href="load-and-add-data.html#cb12-2" tabindex="-1"></a>dir_GEX <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb12-3"><a href="load-and-add-data.html#cb12-3" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP1/sample_filtered_feature_bc_matrix/&quot;</span>,</span>
+<span id="cb12-4"><a href="load-and-add-data.html#cb12-4" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP2/sample_filtered_feature_bc_matrix/&quot;</span>,</span>
+<span id="cb12-5"><a href="load-and-add-data.html#cb12-5" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP3/sample_filtered_feature_bc_matrix/&quot;</span>,</span>
+<span id="cb12-6"><a href="load-and-add-data.html#cb12-6" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP3-rep/sample_filtered_feature_bc_matrix/&quot;</span></span>
+<span id="cb12-7"><a href="load-and-add-data.html#cb12-7" tabindex="-1"></a>)</span>
+<span id="cb12-8"><a href="load-and-add-data.html#cb12-8" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="load-and-add-data.html#cb12-9" tabindex="-1"></a>dir_TCR <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb12-10"><a href="load-and-add-data.html#cb12-10" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP1/vdj_t/filtered_contig_annotations.csv&quot;</span>,</span>
+<span id="cb12-11"><a href="load-and-add-data.html#cb12-11" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP2/vdj_t/filtered_contig_annotations.csv&quot;</span>,</span>
+<span id="cb12-12"><a href="load-and-add-data.html#cb12-12" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP3/vdj_t/filtered_contig_annotations.csv&quot;</span>,</span>
+<span id="cb12-13"><a href="load-and-add-data.html#cb12-13" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP3-rep/vdj_t/filtered_contig_annotations.csv&quot;</span></span>
+<span id="cb12-14"><a href="load-and-add-data.html#cb12-14" tabindex="-1"></a>)</span>
+<span id="cb12-15"><a href="load-and-add-data.html#cb12-15" tabindex="-1"></a></span>
+<span id="cb12-16"><a href="load-and-add-data.html#cb12-16" tabindex="-1"></a>dir_BCR <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb12-17"><a href="load-and-add-data.html#cb12-17" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP1/vdj_b/filtered_contig_annotations.csv&quot;</span>,</span>
+<span id="cb12-18"><a href="load-and-add-data.html#cb12-18" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP2/vdj_b/filtered_contig_annotations.csv&quot;</span>,</span>
+<span id="cb12-19"><a href="load-and-add-data.html#cb12-19" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP3/vdj_b/filtered_contig_annotations.csv&quot;</span>,</span>
+<span id="cb12-20"><a href="load-and-add-data.html#cb12-20" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP3-rep/vdj_b/filtered_contig_annotations.csv&quot;</span></span>
+<span id="cb12-21"><a href="load-and-add-data.html#cb12-21" tabindex="-1"></a>)</span>
+<span id="cb12-22"><a href="load-and-add-data.html#cb12-22" tabindex="-1"></a></span>
+<span id="cb12-23"><a href="load-and-add-data.html#cb12-23" tabindex="-1"></a>sample_name <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;TP1&quot;</span>, <span class="st">&quot;TP2&quot;</span>, <span class="st">&quot;TP3&quot;</span>, <span class="st">&quot;TP3-rep&quot;</span>)</span>
+<span id="cb12-24"><a href="load-and-add-data.html#cb12-24" tabindex="-1"></a></span>
+<span id="cb12-25"><a href="load-and-add-data.html#cb12-25" tabindex="-1"></a>pbmc <span class="ot">&lt;-</span> <span class="fu">Read10XData</span>(<span class="at">dir_GEX =</span> dir_GEX, <span class="at">dir_TCR =</span> dir_TCR, <span class="at">dir_BCR =</span> dir_BCR, <span class="at">sample =</span> sample_name)</span>
+<span id="cb12-26"><a href="load-and-add-data.html#cb12-26" tabindex="-1"></a>pbmc</span>
+<span id="cb12-27"><a href="load-and-add-data.html#cb12-27" tabindex="-1"></a></span>
+<span id="cb12-28"><a href="load-and-add-data.html#cb12-28" tabindex="-1"></a><span class="co"># Show the size of the subject</span></span>
+<span id="cb12-29"><a href="load-and-add-data.html#cb12-29" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">object.size</span>(pbmc), <span class="at">units =</span> <span class="st">&quot;auto&quot;</span>)  </span></code></pre></div>
+<details>
+<summary>
+<strong>What if you want to reduce memory by using BPCells?</strong>
+</summary>
+<p>Note, that this is only possible for Seurat V5, you can use the following:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="load-and-add-data.html#cb13-1" tabindex="-1"></a><span class="co"># A vector of outputs of the cellranger pipeline from 10X</span></span>
+<span id="cb13-2"><a href="load-and-add-data.html#cb13-2" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="load-and-add-data.html#cb13-3" tabindex="-1"></a>dir_GEX <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb13-4"><a href="load-and-add-data.html#cb13-4" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP1/sample_filtered_feature_bc_matrix/&quot;</span>,</span>
+<span id="cb13-5"><a href="load-and-add-data.html#cb13-5" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP2/sample_filtered_feature_bc_matrix/&quot;</span>,</span>
+<span id="cb13-6"><a href="load-and-add-data.html#cb13-6" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP3/sample_filtered_feature_bc_matrix/&quot;</span>,</span>
+<span id="cb13-7"><a href="load-and-add-data.html#cb13-7" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP3-rep/sample_filtered_feature_bc_matrix/&quot;</span></span>
+<span id="cb13-8"><a href="load-and-add-data.html#cb13-8" tabindex="-1"></a>)</span>
+<span id="cb13-9"><a href="load-and-add-data.html#cb13-9" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="load-and-add-data.html#cb13-10" tabindex="-1"></a>dir_TCR <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb13-11"><a href="load-and-add-data.html#cb13-11" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP1/vdj_t/filtered_contig_annotations.csv&quot;</span>,</span>
+<span id="cb13-12"><a href="load-and-add-data.html#cb13-12" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP2/vdj_t/filtered_contig_annotations.csv&quot;</span>,</span>
+<span id="cb13-13"><a href="load-and-add-data.html#cb13-13" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP3/vdj_t/filtered_contig_annotations.csv&quot;</span>,</span>
+<span id="cb13-14"><a href="load-and-add-data.html#cb13-14" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP3-rep/vdj_t/filtered_contig_annotations.csv&quot;</span></span>
+<span id="cb13-15"><a href="load-and-add-data.html#cb13-15" tabindex="-1"></a>)</span>
+<span id="cb13-16"><a href="load-and-add-data.html#cb13-16" tabindex="-1"></a></span>
+<span id="cb13-17"><a href="load-and-add-data.html#cb13-17" tabindex="-1"></a>dir_BCR <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb13-18"><a href="load-and-add-data.html#cb13-18" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP1/vdj_b/filtered_contig_annotations.csv&quot;</span>,</span>
+<span id="cb13-19"><a href="load-and-add-data.html#cb13-19" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP2/vdj_b/filtered_contig_annotations.csv&quot;</span>,</span>
+<span id="cb13-20"><a href="load-and-add-data.html#cb13-20" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP3/vdj_b/filtered_contig_annotations.csv&quot;</span>,</span>
+<span id="cb13-21"><a href="load-and-add-data.html#cb13-21" tabindex="-1"></a>  <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP3-rep/vdj_b/filtered_contig_annotations.csv&quot;</span></span>
+<span id="cb13-22"><a href="load-and-add-data.html#cb13-22" tabindex="-1"></a>)</span>
+<span id="cb13-23"><a href="load-and-add-data.html#cb13-23" tabindex="-1"></a></span>
+<span id="cb13-24"><a href="load-and-add-data.html#cb13-24" tabindex="-1"></a>sample_name <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;TP1&quot;</span>, <span class="st">&quot;TP2&quot;</span>, <span class="st">&quot;TP3&quot;</span>, <span class="st">&quot;TP3-rep&quot;</span>)</span>
+<span id="cb13-25"><a href="load-and-add-data.html#cb13-25" tabindex="-1"></a></span>
+<span id="cb13-26"><a href="load-and-add-data.html#cb13-26" tabindex="-1"></a>pbmc <span class="ot">&lt;-</span> <span class="fu">Read10xData</span>(<span class="at">dir_GEX =</span> dir_GEX, <span class="at">dir_TCR =</span> dir_TCR, <span class="at">dir_BCR =</span> dir_BCR,</span>
+<span id="cb13-27"><a href="load-and-add-data.html#cb13-27" tabindex="-1"></a>                    <span class="at">sample =</span> sample_name, <span class="at">saveBPCells =</span> T)</span>
+<span id="cb13-28"><a href="load-and-add-data.html#cb13-28" tabindex="-1"></a>pbmc</span>
+<span id="cb13-29"><a href="load-and-add-data.html#cb13-29" tabindex="-1"></a></span>
+<span id="cb13-30"><a href="load-and-add-data.html#cb13-30" tabindex="-1"></a><span class="co"># Show the size of the subject</span></span>
+<span id="cb13-31"><a href="load-and-add-data.html#cb13-31" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">object.size</span>(pbmc), <span class="at">units =</span> <span class="st">&quot;auto&quot;</span>)  </span></code></pre></div>
+</details>
+</div>
+<div id="loading-and-adding-10x-metrics" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Loading and adding 10X metrics<a href="load-and-add-data.html#loading-and-adding-10x-metrics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Upon standard CellRanger pipeline, you will obtain a summary of key sequencing and analysis metrics for single-cell experiments. To integrate it into your Seurat object, follow the steps below. (Ensure that it has been turned into a Seurat object using <code>CalculateMetrics</code>, for example) The input file <em>metrics_summary.csv</em> should be contained.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="load-and-add-data.html#cb14-1" tabindex="-1"></a>seq_list <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;/data/SingleCellMQC/CellRanger/TP1/metrics_summary.csv&quot;</span>, </span>
+<span id="cb14-2"><a href="load-and-add-data.html#cb14-2" tabindex="-1"></a>              <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP2/metrics_summary.csv&quot;</span>,</span>
+<span id="cb14-3"><a href="load-and-add-data.html#cb14-3" tabindex="-1"></a>              <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP3/metrics_summary.csv&quot;</span>,</span>
+<span id="cb14-4"><a href="load-and-add-data.html#cb14-4" tabindex="-1"></a>              <span class="st">&quot;/data/SingleCellMQC/CellRanger/TP3-rep/metrics_summary.csv&quot;</span>)</span>
+<span id="cb14-5"><a href="load-and-add-data.html#cb14-5" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="load-and-add-data.html#cb14-6" tabindex="-1"></a>sample_name <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;TP1&quot;</span>, <span class="st">&quot;TP2&quot;</span>, <span class="st">&quot;TP3&quot;</span>, <span class="st">&quot;TP3-rep&quot;</span>)</span>
+<span id="cb14-7"><a href="load-and-add-data.html#cb14-7" tabindex="-1"></a><span class="fu">names</span>(seq_list) <span class="ot">&lt;-</span> sample_name</span>
+<span id="cb14-8"><a href="load-and-add-data.html#cb14-8" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="load-and-add-data.html#cb14-9" tabindex="-1"></a>seq_metrics <span class="ot">&lt;-</span> <span class="fu">Read10XMetrics</span>(<span class="at">file_path =</span> seq_list)</span>
+<span id="cb14-10"><a href="load-and-add-data.html#cb14-10" tabindex="-1"></a>pbmc <span class="ot">&lt;-</span> <span class="fu">Add10XMetrics</span>(pbmc, seq_metrics)</span></code></pre></div>
+</div>
+<div id="adding-information-of-samples" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> Adding information of samples<a href="load-and-add-data.html#adding-information-of-samples" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>You can add other information of your samples using <code>AddSampleMeta</code>. The information would be store into <em><code>pbmc@metadata</code></em>.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="load-and-add-data.html#cb15-1" tabindex="-1"></a>sample_information <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb15-2"><a href="load-and-add-data.html#cb15-2" tabindex="-1"></a>  <span class="at">Sample =</span> <span class="fu">c</span>(<span class="st">&quot;TP1&quot;</span>, <span class="st">&quot;TP2&quot;</span>, <span class="st">&quot;TP3&quot;</span>, <span class="st">&quot;TP3-rep&quot;</span>),</span>
+<span id="cb15-3"><a href="load-and-add-data.html#cb15-3" tabindex="-1"></a>  <span class="at">Batch_EXP =</span> <span class="fu">c</span>(<span class="st">&quot;EXP-1&quot;</span>, <span class="st">&quot;EXP-2&quot;</span>, <span class="st">&quot;EXP-3&quot;</span>, <span class="st">&quot;EXP-4&quot;</span>),</span>
+<span id="cb15-4"><a href="load-and-add-data.html#cb15-4" tabindex="-1"></a>  <span class="at">Batch_TotalSeq_C_Antibodies =</span> <span class="fu">c</span>(<span class="st">&quot;AB-1&quot;</span>, <span class="st">&quot;AB-1&quot;</span>, <span class="st">&quot;AB-1&quot;</span>, <span class="st">&quot;AB-2&quot;</span>),</span>
+<span id="cb15-5"><a href="load-and-add-data.html#cb15-5" tabindex="-1"></a>  <span class="at">Sex =</span> <span class="fu">c</span>(<span class="st">&quot;Male&quot;</span>, <span class="st">&quot;Male&quot;</span>, <span class="st">&quot;Male&quot;</span>, <span class="st">&quot;Male&quot;</span>),</span>
+<span id="cb15-6"><a href="load-and-add-data.html#cb15-6" tabindex="-1"></a>  <span class="at">Time_point =</span> <span class="fu">c</span>(<span class="st">&quot;TP-1&quot;</span>, <span class="st">&quot;TP-2&quot;</span>, <span class="st">&quot;TP-3&quot;</span>, <span class="st">&quot;TP-3&quot;</span>)</span>
+<span id="cb15-7"><a href="load-and-add-data.html#cb15-7" tabindex="-1"></a>)</span>
+<span id="cb15-8"><a href="load-and-add-data.html#cb15-8" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="load-and-add-data.html#cb15-9" tabindex="-1"></a>pbmc <span class="ot">&lt;-</span> <span class="fu">AddSampleMeta</span>(pbmc, <span class="at">merge_by_seurat=</span><span class="st">&quot;orig.ident&quot;</span>, <span class="at">SampleMeta=</span> sample_information,</span>
+<span id="cb15-10"><a href="load-and-add-data.html#cb15-10" tabindex="-1"></a>                      <span class="at">merge_by_meta =</span> <span class="st">&quot;Sample&quot;</span>)</span></code></pre></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="sample-qc.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

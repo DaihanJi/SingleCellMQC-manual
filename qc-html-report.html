@@ -8,7 +8,7 @@
   <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::bs4_book,
 set in the _output.yml file.</p>" />
-  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.43.2 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7 QC HTML report | SingleCellMQC" />
   <meta property="og:type" content="book" />
@@ -29,7 +29,7 @@ set in the _output.yml file.</p>" />
 <meta name="author" content="Daihan Ji#, Mei Han#, Shuting Lu, Jiaying Zeng, Wen Zhong*" />
 
 
-<meta name="date" content="2025-04-01" />
+<meta name="date" content="2025-04-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -37,7 +37,7 @@ set in the _output.yml file.</p>" />
   
   
 <link rel="prev" href="batch-effect-evaluation.html"/>
-
+<link rel="next" href="tips.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -61,10 +61,11 @@ set in the _output.yml file.</p>" />
 <script src="libs/core-js-2.5.3/shim.min.js"></script>
 <script src="libs/react-18.2.0/react.min.js"></script>
 <script src="libs/react-18.2.0/react-dom.min.js"></script>
-<script src="libs/reactwidget-1.0.0/react-tools.js"></script>
+<script src="libs/reactwidget-2.0.0/react-tools.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
-<link href="libs/reactable-0.4.4/reactable.css" rel="stylesheet" />
-<script src="libs/reactable-binding-0.4.4/reactable.js"></script>
+<link href="libs/reactable-0.4.4.9001/reactable.css" rel="stylesheet" />
+<script src="libs/reactable-binding-0.4.4.9001/reactable.js"></script>
 <link href="libs/jquery-sparkline-2.1.2/jquery.sparkline.css" rel="stylesheet" />
 <script src="libs/jquery-sparkline-2.1.2/jquery.sparkline.js"></script>
 <script src="libs/sparkline-binding-2.0/sparkline.js"></script>
@@ -88,7 +89,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -217,14 +218,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4.7" data-path="cell-qc.html"><a href="cell-qc.html#adt-method"><i class="fa fa-check"></i><b>4.4.7</b> ADT method</a></li>
 <li class="chapter" data-level="4.4.8" data-path="cell-qc.html"><a href="cell-qc.html#run-multiple-methods-1"><i class="fa fa-check"></i><b>4.4.8</b> Run multiple methods</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="cell-qc.html"><a href="cell-qc.html#filter-out-problematic-droplets-or-cells"><i class="fa fa-check"></i><b>4.5</b> Filter out problematic droplets or cells</a></li>
-<li class="chapter" data-level="4.6" data-path="cell-qc.html"><a href="cell-qc.html#visualisation-of-cell-qc-results"><i class="fa fa-check"></i><b>4.6</b> Visualisation of cell qc results</a>
+<li class="chapter" data-level="4.5" data-path="cell-qc.html"><a href="cell-qc.html#visualization-of-cell-qc-results"><i class="fa fa-check"></i><b>4.5</b> Visualization of cell QC results</a>
 <ul>
-<li class="chapter" data-level="4.6.1" data-path="cell-qc.html"><a href="cell-qc.html#visualization-of-the-percentage-of-cells-filtered-by-different-methods"><i class="fa fa-check"></i><b>4.6.1</b> Visualization of the percentage of cells filtered by different methods</a></li>
-<li class="chapter" data-level="4.6.2" data-path="cell-qc.html"><a href="cell-qc.html#overlap-between-different-methods-upset-plot"><i class="fa fa-check"></i><b>4.6.2</b> Overlap between different methods (UpSet plot)</a></li>
-<li class="chapter" data-level="4.6.3" data-path="cell-qc.html"><a href="cell-qc.html#comparison-of-metrics-between-pass-and-fail-cells-identified-by-methods"><i class="fa fa-check"></i><b>4.6.3</b> Comparison of metrics between <em>Pass</em> and <em>Fail</em> cells identified by methods</a></li>
-<li class="chapter" data-level="4.6.4" data-path="cell-qc.html"><a href="cell-qc.html#visualization-of-scatter-plots-for-cell-metrics"><i class="fa fa-check"></i><b>4.6.4</b> Visualization of scatter plots for cell metrics</a></li>
+<li class="chapter" data-level="4.5.1" data-path="cell-qc.html"><a href="cell-qc.html#visualization-of-the-percentage-of-cells-filtered-by-different-methods"><i class="fa fa-check"></i><b>4.5.1</b> Visualization of the percentage of cells filtered by different methods</a></li>
+<li class="chapter" data-level="4.5.2" data-path="cell-qc.html"><a href="cell-qc.html#overlap-between-different-methods-upset-plot"><i class="fa fa-check"></i><b>4.5.2</b> Overlap between different methods (UpSet plot)</a></li>
+<li class="chapter" data-level="4.5.3" data-path="cell-qc.html"><a href="cell-qc.html#comparison-of-metrics-between-pass-and-fail-cells-identified-by-methods"><i class="fa fa-check"></i><b>4.5.3</b> Comparison of metrics between <em>Pass</em> and <em>Fail</em> cells identified by methods</a></li>
+<li class="chapter" data-level="4.5.4" data-path="cell-qc.html"><a href="cell-qc.html#visualization-of-scatter-plots-for-cell-metrics"><i class="fa fa-check"></i><b>4.5.4</b> Visualization of scatter plots for cell metrics</a></li>
 </ul></li>
+<li class="chapter" data-level="4.6" data-path="cell-qc.html"><a href="cell-qc.html#filter-out-problematic-droplets-or-cells"><i class="fa fa-check"></i><b>4.6</b> Filter out problematic droplets or cells</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="feature-qc.html"><a href="feature-qc.html"><i class="fa fa-check"></i><b>5</b> <strong>Feature QC</strong></a>
 <ul>
@@ -232,7 +233,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="5.1.1" data-path="feature-qc.html"><a href="feature-qc.html#calculating-feature-metrics"><i class="fa fa-check"></i><b>5.1.1</b> Calculating feature metrics</a></li>
 <li class="chapter" data-level="5.1.2" data-path="feature-qc.html"><a href="feature-qc.html#reference-qc-thresholds-for-feature-qc"><i class="fa fa-check"></i><b>5.1.2</b> Reference QC thresholds for feature QC</a></li>
-<li class="chapter" data-level="5.1.3" data-path="feature-qc.html"><a href="feature-qc.html#calculating-per-feature-variance-explained-by-batch-factors."><i class="fa fa-check"></i><b>5.1.3</b> Calculating per-feature variance explained by batch factors.</a></li>
+<li class="chapter" data-level="5.1.3" data-path="feature-qc.html"><a href="feature-qc.html#calculating-per-feature-variance-explained-by-batch-factors"><i class="fa fa-check"></i><b>5.1.3</b> Calculating per-feature variance explained by batch factors</a></li>
 <li class="chapter" data-level="5.1.4" data-path="feature-qc.html"><a href="feature-qc.html#base-plots-of-feature-metrics"><i class="fa fa-check"></i><b>5.1.4</b> Base plots of feature metrics</a></li>
 <li class="chapter" data-level="5.1.5" data-path="feature-qc.html"><a href="feature-qc.html#scatter-plot-of-the-feature-metrics"><i class="fa fa-check"></i><b>5.1.5</b> Scatter plot of the feature metrics</a></li>
 </ul></li>
@@ -256,10 +257,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2.2" data-path="batch-effect-evaluation.html"><a href="batch-effect-evaluation.html#adt-umap"><i class="fa fa-check"></i><b>6.2.2</b> ADT UMAP</a></li>
 <li class="chapter" data-level="6.2.3" data-path="batch-effect-evaluation.html"><a href="batch-effect-evaluation.html#rnaadt-umap"><i class="fa fa-check"></i><b>6.2.3</b> RNA+ADT UMAP</a></li>
 <li class="chapter" data-level="6.2.4" data-path="batch-effect-evaluation.html"><a href="batch-effect-evaluation.html#harmony-umap"><i class="fa fa-check"></i><b>6.2.4</b> harmony UMAP</a></li>
-<li class="chapter" data-level="6.2.5" data-path="batch-effect-evaluation.html"><a href="batch-effect-evaluation.html#calculating-per-feature-variance-explained-by-variables-at-cell-level."><i class="fa fa-check"></i><b>6.2.5</b> Calculating per-feature variance explained by variables at cell level.</a></li>
+<li class="chapter" data-level="6.2.5" data-path="batch-effect-evaluation.html"><a href="batch-effect-evaluation.html#calculating-per-feature-variance-explained-by-variables-at-cell-level"><i class="fa fa-check"></i><b>6.2.5</b> Calculating per-feature variance explained by variables at cell level</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="qc-html-report.html"><a href="qc-html-report.html"><i class="fa fa-check"></i><b>7</b> <strong>QC HTML report</strong></a></li>
+<li class="chapter" data-level="8" data-path="tips.html"><a href="tips.html"><i class="fa fa-check"></i><b>8</b> <strong>Tips</strong></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="tips.html"><a href="tips.html#global-memory-setting"><i class="fa fa-check"></i><b>8.1</b> Global memory setting</a></li>
+<li class="chapter" data-level="8.2" data-path="tips.html"><a href="tips.html#report-progress-updates"><i class="fa fa-check"></i><b>8.2</b> Report progress updates</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -279,7 +285,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="qc-html-report" class="section level1 hasAnchor" number="7">
 <h1><span class="header-section-number">7</span> <strong>QC HTML report</strong><a href="qc-html-report.html#qc-html-report" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p><strong>Compiled: 2025-04-01</strong>
+<p><strong>Compiled: 2025-04-26</strong>
 <strong>Written by Daihan Ji</strong></p>
 <blockquote>
 <p><strong>If you have already performed preprocessing, you can directly run the <code>RunReport</code> function to generate a QC web report. If not, you can run <code>RunPreprocess</code> to complete some basic workflows.</strong></p>
@@ -335,7 +341,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="qc-html-report.html#cb149-1" tabindex="-1"></a><span class="fu">library</span>(SingleCellMQC)</span>
 <span id="cb149-2"><a href="qc-html-report.html#cb149-2" tabindex="-1"></a><span class="fu">library</span>(Seurat)</span>
 <span id="cb149-3"><a href="qc-html-report.html#cb149-3" tabindex="-1"></a><span class="fu">library</span>(BPCells)</span>
-<span id="cb149-4"><a href="qc-html-report.html#cb149-4" tabindex="-1"></a><span class="co">#Load a pre-existing Seurat object or process raw data using SingleCellMQC.</span></span>
+<span id="cb149-4"><a href="qc-html-report.html#cb149-4" tabindex="-1"></a><span class="co">#Load a pre-existing Seurat object or processed raw data using SingleCellMQC.</span></span>
 <span id="cb149-5"><a href="qc-html-report.html#cb149-5" tabindex="-1"></a>pbmc <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;/data/pbmc.rds&quot;</span>)</span></code></pre></div>
 <ul>
 <li><strong>Run Preprocessing Pipeline for Single-Cell Data (If no prior preprocessing has been performed)</strong></li>
@@ -352,8 +358,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="batch-effect-evaluation.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="batch-effect-evaluation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="tips.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -367,42 +373,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
 });
 });
 </script>

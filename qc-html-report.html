@@ -8,7 +8,7 @@
   <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::bs4_book,
 set in the _output.yml file.</p>" />
-  <meta name="generator" content="bookdown 0.43.2 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7 QC HTML report | SingleCellMQC" />
   <meta property="og:type" content="book" />
@@ -29,7 +29,7 @@ set in the _output.yml file.</p>" />
 <meta name="author" content="Daihan Ji#, Mei Han#, Shuting Lu, Jiaying Zeng, Wen Zhong*" />
 
 
-<meta name="date" content="2025-04-26" />
+<meta name="date" content="2025-05-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -61,11 +61,10 @@ set in the _output.yml file.</p>" />
 <script src="libs/core-js-2.5.3/shim.min.js"></script>
 <script src="libs/react-18.2.0/react.min.js"></script>
 <script src="libs/react-18.2.0/react-dom.min.js"></script>
-<script src="libs/reactwidget-2.0.0/react-tools.js"></script>
-<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/reactwidget-1.0.0/react-tools.js"></script>
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
-<link href="libs/reactable-0.4.4.9001/reactable.css" rel="stylesheet" />
-<script src="libs/reactable-binding-0.4.4.9001/reactable.js"></script>
+<link href="libs/reactable-0.4.4/reactable.css" rel="stylesheet" />
+<script src="libs/reactable-binding-0.4.4/reactable.js"></script>
 <link href="libs/jquery-sparkline-2.1.2/jquery.sparkline.css" rel="stylesheet" />
 <script src="libs/jquery-sparkline-2.1.2/jquery.sparkline.js"></script>
 <script src="libs/sparkline-binding-2.0/sparkline.js"></script>
@@ -89,7 +88,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -257,14 +256,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2.2" data-path="batch-effect-evaluation.html"><a href="batch-effect-evaluation.html#adt-umap"><i class="fa fa-check"></i><b>6.2.2</b> ADT UMAP</a></li>
 <li class="chapter" data-level="6.2.3" data-path="batch-effect-evaluation.html"><a href="batch-effect-evaluation.html#rnaadt-umap"><i class="fa fa-check"></i><b>6.2.3</b> RNA+ADT UMAP</a></li>
 <li class="chapter" data-level="6.2.4" data-path="batch-effect-evaluation.html"><a href="batch-effect-evaluation.html#harmony-umap"><i class="fa fa-check"></i><b>6.2.4</b> harmony UMAP</a></li>
-<li class="chapter" data-level="6.2.5" data-path="batch-effect-evaluation.html"><a href="batch-effect-evaluation.html#calculating-per-feature-variance-explained-by-variables-at-cell-level"><i class="fa fa-check"></i><b>6.2.5</b> Calculating per-feature variance explained by variables at cell level</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="batch-effect-evaluation.html"><a href="batch-effect-evaluation.html#feature-level"><i class="fa fa-check"></i><b>6.3</b> Feature level</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="batch-effect-evaluation.html"><a href="batch-effect-evaluation.html#calculating-per-feature-variance-explained-by-variables-at-cell-level"><i class="fa fa-check"></i><b>6.3.1</b> Calculating per-feature variance explained by variables at cell level</a></li>
+<li class="chapter" data-level="6.3.2" data-path="batch-effect-evaluation.html"><a href="batch-effect-evaluation.html#calculating-per-feature-variance-explained-by-variables-at-sample-level"><i class="fa fa-check"></i><b>6.3.2</b> Calculating per-feature variance explained by variables at sample level</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="qc-html-report.html"><a href="qc-html-report.html"><i class="fa fa-check"></i><b>7</b> <strong>QC HTML report</strong></a></li>
 <li class="chapter" data-level="8" data-path="tips.html"><a href="tips.html"><i class="fa fa-check"></i><b>8</b> <strong>Tips</strong></a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="tips.html"><a href="tips.html#global-memory-setting"><i class="fa fa-check"></i><b>8.1</b> Global memory setting</a></li>
-<li class="chapter" data-level="8.2" data-path="tips.html"><a href="tips.html#report-progress-updates"><i class="fa fa-check"></i><b>8.2</b> Report progress updates</a></li>
+<li class="chapter" data-level="8.1" data-path="tips.html"><a href="tips.html#progress-updates"><i class="fa fa-check"></i><b>8.1</b> Progress updates</a></li>
+<li class="chapter" data-level="8.2" data-path="tips.html"><a href="tips.html#future-parallel"><i class="fa fa-check"></i><b>8.2</b> Future parallel</a></li>
 </ul></li>
 </ul>
 
@@ -285,7 +288,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="qc-html-report" class="section level1 hasAnchor" number="7">
 <h1><span class="header-section-number">7</span> <strong>QC HTML report</strong><a href="qc-html-report.html#qc-html-report" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p><strong>Compiled: 2025-04-26</strong>
+<p><strong>Compiled: 2025-05-08</strong>
 <strong>Written by Daihan Ji</strong></p>
 <blockquote>
 <p><strong>If you have already performed preprocessing, you can directly run the <code>RunReport</code> function to generate a QC web report. If not, you can run <code>RunPreprocess</code> to complete some basic workflows.</strong></p>
@@ -306,51 +309,57 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><p><strong><code>section.sample</code></strong>: Sections to include in the Sample QC module. Default is <code>c(1:3)</code>.</p>
 <ul>
-<li><p><strong><code>1</code></strong>: Run Sample QC: Sample quality assessment.</p></li>
-<li><p><strong><code>2</code></strong>: Run Sample QC: Outlier sample detection by cell type.</p></li>
-<li><p><strong><code>3</code></strong>: Run Sample QC: Sample identity verification.</p></li>
+<li><p><strong>1</strong>: Run Sample QC: Sample quality assessment.</p></li>
+<li><p><strong>2</strong>: Run Sample QC: Outlier sample detection by cell type.</p></li>
+<li><p><strong>3</strong>: Run Sample QC: Sample identity verification.</p></li>
 </ul></li>
 </ul>
 <p><strong>Cell QC Module</strong></p>
 <ul>
 <li><p><strong><code>section.cell</code></strong>: Sections to include in the Cell QC module. Default is <code>c(1:2)</code>.</p>
 <ul>
-<li><p><strong><code>1</code></strong>: Run Cell QC: Low-quality cell information.</p></li>
-<li><p><strong><code>2</code></strong>: Run Cell QC: Doublet information.</p></li>
+<li><p><strong>1</strong>: Run Cell QC: Low-quality cell information.</p></li>
+<li><p><strong>2</strong>: Run Cell QC: Doublet information.</p></li>
 </ul></li>
 </ul>
 <p><strong>Feature QC Module</strong></p>
 <ul>
 <li><p><strong><code>section.feature</code></strong>: Sections to include in the Feature QC module. Default is <code>1</code>.</p>
 <ul>
-<li><strong><code>1</code></strong>: Run Feature QC: Feature quality assessment.</li>
+<li><strong>1</strong>: Run Feature QC: Feature quality assessment.</li>
 </ul></li>
 </ul>
 <p><strong>Batch QC Module</strong></p>
 <ul>
-<li><p><strong><code>section.batch</code></strong>: Sections to include in the Batch QC module. Default is <code>1:2</code>.</p>
+<li><p><strong><code>section.batch</code></strong>: Sections to include in the Batch QC module. Default is <code>1:3</code>.</p>
 <ul>
-<li><p><strong><code>1</code></strong>: Run Batch QC: Clustering QC.</p></li>
-<li><p><strong><code>2</code></strong>: Run Batch QC: Covariate Impact.</p></li>
+<li><p><strong>1</strong>: Run Batch QC: Sample level.</p></li>
+<li><p><strong>2</strong>: Run Batch QC: Cell level.</p></li>
+<li><p><strong>3</strong>: Run Batch QC: Feature level.</p></li>
 </ul></li>
 </ul>
 <hr />
 <ul>
 <li><strong>Load data</strong></li>
 </ul>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="qc-html-report.html#cb149-1" tabindex="-1"></a><span class="fu">library</span>(SingleCellMQC)</span>
-<span id="cb149-2"><a href="qc-html-report.html#cb149-2" tabindex="-1"></a><span class="fu">library</span>(Seurat)</span>
-<span id="cb149-3"><a href="qc-html-report.html#cb149-3" tabindex="-1"></a><span class="fu">library</span>(BPCells)</span>
-<span id="cb149-4"><a href="qc-html-report.html#cb149-4" tabindex="-1"></a><span class="co">#Load a pre-existing Seurat object or processed raw data using SingleCellMQC.</span></span>
-<span id="cb149-5"><a href="qc-html-report.html#cb149-5" tabindex="-1"></a>pbmc <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;/data/pbmc.rds&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="qc-html-report.html#cb151-1" tabindex="-1"></a><span class="fu">library</span>(SingleCellMQC)</span>
+<span id="cb151-2"><a href="qc-html-report.html#cb151-2" tabindex="-1"></a><span class="fu">library</span>(Seurat)</span>
+<span id="cb151-3"><a href="qc-html-report.html#cb151-3" tabindex="-1"></a><span class="fu">library</span>(BPCells)</span>
+<span id="cb151-4"><a href="qc-html-report.html#cb151-4" tabindex="-1"></a><span class="co">#Load a pre-existing Seurat object or processed raw data using SingleCellMQC.</span></span>
+<span id="cb151-5"><a href="qc-html-report.html#cb151-5" tabindex="-1"></a>pbmc <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;/data/pbmc.rds&quot;</span>)</span></code></pre></div>
 <ul>
 <li><strong>Run Preprocessing Pipeline for Single-Cell Data (If no prior preprocessing has been performed)</strong></li>
 </ul>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="qc-html-report.html#cb150-1" tabindex="-1"></a>pbmc <span class="ot">&lt;-</span> <span class="fu">RunPreprocess</span>(pbmc, <span class="at">sample.by =</span> <span class="st">&quot;orig.ident&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="qc-html-report.html#cb152-1" tabindex="-1"></a>pbmc <span class="ot">&lt;-</span> <span class="fu">RunPreprocess</span>(pbmc, <span class="at">sample.by =</span> <span class="st">&quot;orig.ident&quot;</span>)</span></code></pre></div>
 <ul>
 <li><strong>Generate QC HTML Report</strong></li>
 </ul>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="qc-html-report.html#cb151-1" tabindex="-1"></a>pbmc <span class="ot">&lt;-</span> <span class="fu">RunReport</span>(pbmc, <span class="at">sample.by =</span> <span class="st">&quot;orig.ident&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="qc-html-report.html#cb153-1" tabindex="-1"></a><span class="fu">RunReport</span>(</span>
+<span id="cb153-2"><a href="qc-html-report.html#cb153-2" tabindex="-1"></a>  <span class="at">object=</span>pbmc,</span>
+<span id="cb153-3"><a href="qc-html-report.html#cb153-3" tabindex="-1"></a>  <span class="at">tissue =</span> <span class="st">&quot;blood&quot;</span>, <span class="co"># tissue for PCT outlier sample detection.</span></span>
+<span id="cb153-4"><a href="qc-html-report.html#cb153-4" tabindex="-1"></a>  <span class="at">RNA.batch.by =</span> <span class="fu">c</span>(<span class="st">&quot;orig.ident&quot;</span>, <span class="st">&quot;Batch_EXP&quot;</span>, <span class="st">&quot;Time_point&quot;</span>), <span class="co">#Column name(s) in the metadata indicating RNA batch information (categorical variable) or other categorical variables for PCA or UMAP plot. Default is &quot;orig.ident&quot;. Only for: section.batch (1, 2).</span></span>
+<span id="cb153-5"><a href="qc-html-report.html#cb153-5" tabindex="-1"></a>  <span class="at">RNA.batch.covariate =</span> <span class="fu">c</span>(<span class="st">&quot;nFeature_RNA&quot;</span>, <span class="st">&quot;percent.mt&quot;</span>, <span class="st">&quot;Batch_EXP&quot;</span>, <span class="st">&quot;Time_point&quot;</span>) <span class="co">#Covariates (can be categorical or continuous) for RNA SVD and ⁠Variance Explained⁠ analysis. Default is c(&quot;orig.ident&quot;, &quot;percent.mt&quot;, &quot;nFeature_RNA&quot;, &quot;nCount_RNA&quot;).Only for: section.batch (1, 3).</span></span>
+<span id="cb153-6"><a href="qc-html-report.html#cb153-6" tabindex="-1"></a>)</span></code></pre></div>
 
 </div>
             </section>
@@ -373,42 +382,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-  "sharing": {
-    "github": false,
-    "facebook": true,
-    "twitter": true,
-    "linkedin": false,
-    "weibo": false,
-    "instapaper": false,
-    "vk": false,
-    "whatsapp": false,
-    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-  },
-  "fontsettings": {
-    "theme": "white",
-    "family": "sans",
-    "size": 2
-  },
-  "edit": {
-    "link": null,
-    "text": null
-  },
-  "history": {
-    "link": null,
-    "text": null
-  },
-  "view": {
-    "link": null,
-    "text": null
-  },
-  "download": null,
-  "search": {
-    "engine": "fuse",
-    "options": null
-  },
-  "toc": {
-    "collapse": "subsection"
-  }
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
 });
 });
 </script>

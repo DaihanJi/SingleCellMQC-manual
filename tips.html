@@ -8,7 +8,7 @@
   <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::bs4_book,
 set in the _output.yml file.</p>" />
-  <meta name="generator" content="bookdown 0.43.2 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8 Tips | SingleCellMQC" />
   <meta property="og:type" content="book" />
@@ -29,7 +29,7 @@ set in the _output.yml file.</p>" />
 <meta name="author" content="Daihan Ji#, Mei Han#, Shuting Lu, Jiaying Zeng, Wen Zhong*" />
 
 
-<meta name="date" content="2025-04-26" />
+<meta name="date" content="2025-05-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -61,11 +61,10 @@ set in the _output.yml file.</p>" />
 <script src="libs/core-js-2.5.3/shim.min.js"></script>
 <script src="libs/react-18.2.0/react.min.js"></script>
 <script src="libs/react-18.2.0/react-dom.min.js"></script>
-<script src="libs/reactwidget-2.0.0/react-tools.js"></script>
-<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/reactwidget-1.0.0/react-tools.js"></script>
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
-<link href="libs/reactable-0.4.4.9001/reactable.css" rel="stylesheet" />
-<script src="libs/reactable-binding-0.4.4.9001/reactable.js"></script>
+<link href="libs/reactable-0.4.4/reactable.css" rel="stylesheet" />
+<script src="libs/reactable-binding-0.4.4/reactable.js"></script>
 <link href="libs/jquery-sparkline-2.1.2/jquery.sparkline.css" rel="stylesheet" />
 <script src="libs/jquery-sparkline-2.1.2/jquery.sparkline.js"></script>
 <script src="libs/sparkline-binding-2.0/sparkline.js"></script>
@@ -89,7 +88,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -257,14 +256,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2.2" data-path="batch-effect-evaluation.html"><a href="batch-effect-evaluation.html#adt-umap"><i class="fa fa-check"></i><b>6.2.2</b> ADT UMAP</a></li>
 <li class="chapter" data-level="6.2.3" data-path="batch-effect-evaluation.html"><a href="batch-effect-evaluation.html#rnaadt-umap"><i class="fa fa-check"></i><b>6.2.3</b> RNA+ADT UMAP</a></li>
 <li class="chapter" data-level="6.2.4" data-path="batch-effect-evaluation.html"><a href="batch-effect-evaluation.html#harmony-umap"><i class="fa fa-check"></i><b>6.2.4</b> harmony UMAP</a></li>
-<li class="chapter" data-level="6.2.5" data-path="batch-effect-evaluation.html"><a href="batch-effect-evaluation.html#calculating-per-feature-variance-explained-by-variables-at-cell-level"><i class="fa fa-check"></i><b>6.2.5</b> Calculating per-feature variance explained by variables at cell level</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="batch-effect-evaluation.html"><a href="batch-effect-evaluation.html#feature-level"><i class="fa fa-check"></i><b>6.3</b> Feature level</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="batch-effect-evaluation.html"><a href="batch-effect-evaluation.html#calculating-per-feature-variance-explained-by-variables-at-cell-level"><i class="fa fa-check"></i><b>6.3.1</b> Calculating per-feature variance explained by variables at cell level</a></li>
+<li class="chapter" data-level="6.3.2" data-path="batch-effect-evaluation.html"><a href="batch-effect-evaluation.html#calculating-per-feature-variance-explained-by-variables-at-sample-level"><i class="fa fa-check"></i><b>6.3.2</b> Calculating per-feature variance explained by variables at sample level</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="qc-html-report.html"><a href="qc-html-report.html"><i class="fa fa-check"></i><b>7</b> <strong>QC HTML report</strong></a></li>
 <li class="chapter" data-level="8" data-path="tips.html"><a href="tips.html"><i class="fa fa-check"></i><b>8</b> <strong>Tips</strong></a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="tips.html"><a href="tips.html#global-memory-setting"><i class="fa fa-check"></i><b>8.1</b> Global memory setting</a></li>
-<li class="chapter" data-level="8.2" data-path="tips.html"><a href="tips.html#report-progress-updates"><i class="fa fa-check"></i><b>8.2</b> Report progress updates</a></li>
+<li class="chapter" data-level="8.1" data-path="tips.html"><a href="tips.html#progress-updates"><i class="fa fa-check"></i><b>8.1</b> Progress updates</a></li>
+<li class="chapter" data-level="8.2" data-path="tips.html"><a href="tips.html#future-parallel"><i class="fa fa-check"></i><b>8.2</b> Future parallel</a></li>
 </ul></li>
 </ul>
 
@@ -285,20 +288,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="tips" class="section level1 hasAnchor" number="8">
 <h1><span class="header-section-number">8</span> <strong>Tips</strong><a href="tips.html#tips" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p><strong>Compiled: 2025-04-26</strong>
-<strong>Written by Jiaying Zeng</strong></p>
+<p><strong>Compiled: 2025-05-08</strong>
+<strong>Written by Jiaying Zeng and Daihan Ji</strong></p>
 <p><strong>Here are some helpful tips for you to use SingleCellMQC more smoothly.</strong></p>
-<div id="global-memory-setting" class="section level2 hasAnchor" number="8.1">
-<h2><span class="header-section-number">8.1</span> Global memory setting<a href="tips.html#global-memory-setting" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>When you initiate the work, the default global memory limit is 500MB, which is often insufficient, so it’s recommended to set it to 1GB or higher. For example, you can set global memory limit to 1GB (1024 MB * 1024 KB/MB * 1024 B/KB).</p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="tips.html#cb152-1" tabindex="-1"></a><span class="fu">library</span>(future)</span>
-<span id="cb152-2"><a href="tips.html#cb152-2" tabindex="-1"></a><span class="fu">options</span>(<span class="at">future.globals.maxSize =</span> <span class="dv">1024</span> <span class="sc">*</span> <span class="dv">1024</span> <span class="sc">*</span> <span class="dv">1024</span>)</span></code></pre></div>
-</div>
-<div id="report-progress-updates" class="section level2 hasAnchor" number="8.2">
-<h2><span class="header-section-number">8.2</span> Report progress updates<a href="tips.html#report-progress-updates" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="progress-updates" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Progress updates<a href="tips.html#progress-updates" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Turning on the global progress update report feature before your analysis is suggested, so that you could keep better track of the whole QC progress.</p>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="tips.html#cb153-1" tabindex="-1"></a><span class="fu">library</span>(progressr)</span>
-<span id="cb153-2"><a href="tips.html#cb153-2" tabindex="-1"></a><span class="fu">handlers</span>(<span class="at">global =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="tips.html#cb154-1" tabindex="-1"></a><span class="fu">library</span>(progressr)</span>
+<span id="cb154-2"><a href="tips.html#cb154-2" tabindex="-1"></a><span class="fu">handlers</span>(<span class="at">global =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+</div>
+<div id="future-parallel" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> Future parallel<a href="tips.html#future-parallel" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><strong>Future parallel global memory setting</strong></li>
+</ul>
+<p>When you initiate the work by future parallel, the default global memory limit is 500MB, which is often insufficient, so it’s recommended to set it to 1GB or higher. For example, you can set global memory limit to 1GB (1024 MB * 1024 KB/MB * 1024 B/KB).</p>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="tips.html#cb155-1" tabindex="-1"></a><span class="fu">library</span>(future)</span>
+<span id="cb155-2"><a href="tips.html#cb155-2" tabindex="-1"></a><span class="fu">options</span>(<span class="at">future.globals.maxSize =</span> <span class="dv">1024</span> <span class="sc">*</span> <span class="dv">1024</span> <span class="sc">*</span> <span class="dv">1024</span>)</span></code></pre></div>
+<ul>
+<li><strong>How to use parallelization</strong></li>
+</ul>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="tips.html#cb156-1" tabindex="-1"></a><span class="fu">library</span>(future)</span>
+<span id="cb156-2"><a href="tips.html#cb156-2" tabindex="-1"></a><span class="co"># change the current plan to access parallelization</span></span>
+<span id="cb156-3"><a href="tips.html#cb156-3" tabindex="-1"></a><span class="fu">plan</span>(<span class="st">&quot;multiprocess&quot;</span>, <span class="at">workers =</span> <span class="dv">4</span>)</span>
+<span id="cb156-4"><a href="tips.html#cb156-4" tabindex="-1"></a></span>
+<span id="cb156-5"><a href="tips.html#cb156-5" tabindex="-1"></a><span class="co"># task example: e.g. scDblFinder doublet detction</span></span>
+<span id="cb156-6"><a href="tips.html#cb156-6" tabindex="-1"></a>pbmc<span class="ot">&lt;-</span> <span class="fu">RunDbt_scDblFinder</span>(pbmc, <span class="at">split.by =</span> <span class="st">&quot;orig.ident&quot;</span>, <span class="at">add.Seurat=</span>T, <span class="at">do.topscore=</span>T)</span>
+<span id="cb156-7"><a href="tips.html#cb156-7" tabindex="-1"></a></span>
+<span id="cb156-8"><a href="tips.html#cb156-8" tabindex="-1"></a><span class="co"># change the the current plan to sequential</span></span>
+<span id="cb156-9"><a href="tips.html#cb156-9" tabindex="-1"></a><span class="fu">plan</span>(<span class="st">&quot;sequential&quot;</span>)</span></code></pre></div>
+<ul>
+<li><p><strong>Functions supporting</strong></p></li>
+<li><p>Read data (v0.6.0+): <code>Read10XData</code>, <code>Read10XH5Data</code></p></li>
+<li><p>Doublet detection (v0.6.0+): <code>RunDbt_hybrid</code>, <code>RunDbt_bcds</code>, <code>RunDbt_cxds</code>, <code>RunDbt_scDblFinder</code>, <code>RunDbt_DoubletFinder</code>, <code>RunDbt_ADT</code></p></li>
+</ul>
 
 </div>
 </div>
@@ -322,42 +345,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-  "sharing": {
-    "github": false,
-    "facebook": true,
-    "twitter": true,
-    "linkedin": false,
-    "weibo": false,
-    "instapaper": false,
-    "vk": false,
-    "whatsapp": false,
-    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-  },
-  "fontsettings": {
-    "theme": "white",
-    "family": "sans",
-    "size": 2
-  },
-  "edit": {
-    "link": null,
-    "text": null
-  },
-  "history": {
-    "link": null,
-    "text": null
-  },
-  "view": {
-    "link": null,
-    "text": null
-  },
-  "download": null,
-  "search": {
-    "engine": "fuse",
-    "options": null
-  },
-  "toc": {
-    "collapse": "subsection"
-  }
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
 });
 });
 </script>

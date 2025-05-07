@@ -68,8 +68,10 @@ rna-umap
 adt-umap
 rnaadt-umap
 harmony-umap
+feature-level
 calculating-per-feature-variance-explained-by-variables-at-cell-level
+calculating-per-feature-variance-explained-by-variables-at-sample-level
 qc-html-report
 tips
-global-memory-setting
-report-progress-updates
+progress-updates
+future-parallel
